@@ -19,7 +19,7 @@ module InfernoTemplate
 
       test do
         id :patient_read
-        title 'Read Patient '
+        title 'Read Patient'
         description 'Read Patient with id 85'
 
         run do
@@ -27,7 +27,7 @@ module InfernoTemplate
           fhir_read('Patient', '85')
       
           assert_response_status(200)
-          assert_resource_type(:patient)
+          assert_resource_type('Patient')
         end
       end
     end
