@@ -27,7 +27,6 @@ module InfernoTemplate
       uses_request :fhir_patient
       
       run do
-        # assert_valid_resource(profile_url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient')
         assert_valid_resource(profile_url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient')
       end
     end
