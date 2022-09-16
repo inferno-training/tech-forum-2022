@@ -4,6 +4,8 @@ module InfernoTemplate
     description 'Verify that the server makes Patient resources available'
     id :patient_group
 
+    output :patient_name
+
     test do
       title 'Server returns requested Patient resource from the Patient read interaction'
       description %(
@@ -21,6 +23,9 @@ module InfernoTemplate
         assert_resource_type(:patient)
         assert resource.id == patient_id,
                "Requested resource with id #{patient_id}, received resource with id #{resource.id}"
+
+        patient = JSON.parse(request.response_body)
+        output patient_name: patient['name']
       end
     end
 
@@ -32,6 +37,8 @@ module InfernoTemplate
       # This test will use the response from the :patient request in the
       # previous test
       uses_request :patient
+
+      input :patient_name
 
       run do
         assert_resource_type(:patient)
