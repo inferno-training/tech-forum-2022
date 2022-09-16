@@ -1,41 +1,34 @@
 module InfernoTemplate
   class PatientGroup < Inferno::TestGroup
-    title 'Patient  Tests'
-    description 'Verify that the server makes Patient resources available'
+    title 'Patient Read Test'
+    description 'Verify that the server supports FHIR Patient read'
     id :patient_group
 
     test do
-      title 'Server returns requested Patient resource from the Patient read interaction'
-      description %(
-        Verify that Patient resources can be read from the server.
-      )
+      id :patient_read
+      makes_request :fhir_patient # Named requests can be used by other tests​
 
-      input :patient_id
-      # Named requests can be used by other tests
-      makes_request :patient
+      title 'Read Patient'
+      description 'Read Patient with id 85'
 
       run do
-        fhir_read(:patient, patient_id, name: :patient)
-
+        # FHIR requests will automatically use the client declared above
+        fhir_read('Patient', '85', name: :fhir_patient)
+    
         assert_response_status(200)
-        assert_resource_type(:patient)
-        assert resource.id == patient_id,
-               "Requested resource with id #{patient_id}, received resource with id #{resource.id}"
+        assert_resource_type('Patient')
       end
     end
 
     test do
-      title 'Patient resource is valid'
-      description %(
-        Verify that the Patient resource returned from the server is a valid FHIR resource.
-      )
-      # This test will use the response from the :patient request in the
-      # previous test
-      uses_request :patient
-
+      title 'Validate Patient Resource'
+      description 'Validate Patient Resource against US Core Patient Profile'
+      # This test will use the response from the :fhir_patient request in the previous test
+      uses_request :fhir_patient
+      
       run do
-        assert_resource_type(:patient)
-        assert_valid_resource
+        # assert_valid_resource(profile_url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient')
+        assert_valid_resource(profile_url: 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient')
       end
     end
   end

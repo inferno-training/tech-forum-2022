@@ -6,32 +6,11 @@ module InfernoTemplate
     title 'Inferno Test Suite Template'
     description 'A basic test suite template for Inferno'
 
-    # This input will be available to all tests in this suite
-    input :url
-
-    # All FHIR requests in this suite will use this FHIR client
+    # FHIR clients are created to make requests
     fhir_client do
-      url :url
-    end
-
-    # Tests and TestGroups can be defined inline
-    group do
-      id :capability_statement
-      title 'Capability Statement'
-      description 'Verify that the server has a CapabilityStatement'
-
-      test do
-        id :capability_statement_read
-        title 'Read CapabilityStatement'
-        description 'Read CapabilityStatement from /metadata endpoint'
-
-        run do
-          fhir_get_capability_statement
-
-          assert_response_status(200)
-          assert_resource_type(:capability_statement)
-        end
-      end
+      url 'https://inferno.healthit.gov/reference-server/r4' # required
+      bearer_token 'SAMPLE_TOKEN'                            # optional
+      # headers 'X-Custom-Header': 'def'                     # optional
     end
 
     # Tests and TestGroups can be written in separate files and then included
