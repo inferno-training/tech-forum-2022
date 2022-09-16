@@ -11,7 +11,7 @@ module InfernoTemplate
 
     # All FHIR requests in this suite will use this FHIR client
     fhir_client do
-      url :url
+      url :url # The input can be used throughout the test
     end
 
     # Tests and TestGroups can be defined inline
