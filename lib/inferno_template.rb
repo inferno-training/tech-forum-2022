@@ -1,5 +1,3 @@
-require_relative 'inferno_template/patient_group'
-
 module InfernoTemplate
   class Suite < Inferno::TestSuite
     id :test_suite_template
@@ -33,9 +31,5 @@ module InfernoTemplate
         end
       end
     end
-
-    # Tests and TestGroups can be written in separate files and then included
-    # using their id
-    group from: :patient_group
   end
 end
