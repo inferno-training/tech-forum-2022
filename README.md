@@ -1,7 +1,7 @@
 # Inferno Template
 
-This is a template repository for an
-[Inferno](https://github.com/inferno-community/inferno-core) test kit.
+This is a fork of the template repository for an
+[Inferno](https://github.com/inferno-community/inferno-core) test kit. The branhces in this repository contain code snippets that were used as examples during a presentation at the 2022 ONC Tech Forum. A recording of that presentation is available here: [ONC 2022 Tech Forum: Inferno Framework Capabilities Beyond (g)(10)](https://youtu.be/epf7OHPaeZ0)
 
 ## Instructions
 
